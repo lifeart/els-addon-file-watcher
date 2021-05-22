@@ -1,7 +1,7 @@
 {
   "name": "els-addon-file-watcher",
-  "version": "0.0.3",
-  "description": "",
+  "version": "0.0.1",
+  "description": "File watcher addon for language server",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -18,19 +18,18 @@
   },
   "homepage": "https://github.com/lifeart/els-addon-file-watcher#readme",
   "dependencies": {
-    "@lifeart/ember-language-server": "^1.0.5",
-    "vscode-jsonrpc": "^6.0.0",
-    "vscode-languageserver-protocol": "^3.16.0",
-    "vscode-languageserver-textdocument": "^1.0.1",
+    "@lifeart/ember-language-server": "^1.10.0",
+    "chokidar": "^3.5.1",
+    "vscode-languageserver": "7.0.0",
     "vscode-uri": "^3.0.2"
   },
   "ember-language-server": {
     "entry": "./index",
     "debug": false,
     "capabilities": {
-      "completionProvider": true,
-      "definitionProvider": true,
-      "referencesProvider": true
+      "completionProvider": false,
+      "definitionProvider": false,
+      "referencesProvider": false
     }
   },
   "devDependencies": {
