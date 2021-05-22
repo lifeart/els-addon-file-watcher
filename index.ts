@@ -1,7 +1,5 @@
 import { Project, Server, AddonAPI } from "@lifeart/ember-language-server";
 import { FileChangeType } from "vscode-languageserver/node";
-import { URI } from "vscode-uri";
-
 import chokidar from "chokidar";
 module.exports = class ElsAddonFileWatcher implements AddonAPI {
   server!: Server;
@@ -9,6 +7,13 @@ module.exports = class ElsAddonFileWatcher implements AddonAPI {
   onInit(server: Server, project: Project) {
     this.server = server;
     this.project = project;
+
+    if (server.flags.hasExternalFileWatcher === true) {
+      server.connection.console.warn('Skipping [els-addon-file-watcher] initialization because external file watcher already enabled in Ember Language Server');
+      return;
+    }
+
+    server.flags.hasExternalFileWatcher = true;
 
     return this.initChokidar();
   }
@@ -28,13 +33,13 @@ module.exports = class ElsAddonFileWatcher implements AddonAPI {
 
     watcher
       .on("add", (path) => {
-        this.project.trackChange(URI.file(path), FileChangeType.Created);
+        this.project.trackChange(path, FileChangeType.Created);
       })
       .on("change", (path) => {
-        this.project.trackChange(URI.file(path), FileChangeType.Changed);
+        this.project.trackChange(path, FileChangeType.Changed);
       })
       .on("unlink", (path) => {
-        this.project.trackChange(URI.file(path), FileChangeType.Deleted);
+        this.project.trackChange(path, FileChangeType.Deleted);
       });
 
     return () => {

@@ -1,6 +1,6 @@
 {
   "name": "els-addon-file-watcher",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "File watcher addon for language server",
   "main": "index.js",
   "scripts": {
@@ -20,8 +20,7 @@
   "dependencies": {
     "@lifeart/ember-language-server": "^1.10.0",
     "chokidar": "^3.5.1",
-    "vscode-languageserver": "7.0.0",
-    "vscode-uri": "^3.0.2"
+    "vscode-languageserver": "7.0.0"
   },
   "ember-language-server": {
     "entry": "./index",
